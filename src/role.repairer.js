@@ -9,11 +9,11 @@ var roleRepairer = {
     
             if(creep.memory.repairing && creep.carry.energy == 0) {
                 creep.memory.repairing = false;
-                creep.say('🔄 harvest');
+                creep.say('Harvest');
             }
             if(!creep.memory.repairing && creep.carry.energy == creep.carryCapacity) {
                 creep.memory.repairing = true;
-                creep.say('🚧 repairing');
+                creep.say('Repairing');
             }
             if(creep.memory.repairing) {
                 var targets = _.filter(creep.room.find(FIND_STRUCTURES), (struct) => struct.hits < struct.hitsMax);
