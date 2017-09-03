@@ -5,6 +5,16 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 
+function defaultDict() {
+    this.get = function (key) {
+        if (this.hasOwnProperty(key)) {
+            return key;
+        } else {
+            return 0;
+        }
+    }
+}
+
 module.exports.loop = function () {
 
     for(var name in Memory.creeps) {
@@ -49,7 +59,7 @@ module.exports.loop = function () {
             {align: 'left', opacity: 0.8});
     }
 
-    for(var name in Game.creeps) {
+    for (var name in Game.creeps) {
         var creep = Game.creeps[name];
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
