@@ -1,4 +1,4 @@
-// Version 1.0
+// Version 1.1
 
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
