@@ -28,26 +28,26 @@ module.exports.loop = function () {
 
     if(harvesters.length < 3) {
         var newName = Game.spawns['Spawn1'].createCreep([WORK, CARRY, MOVE], undefined, {role: 'harvester'});
-        console.log('Spawning new harvester: ' + newName);
+        //console.log('Spawning new harvester: ' + newName);
     }
     
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
     
     if (upgraders.length < 4) {
         var newName = Game.spawns['Spawn1'].createCreep([WORK, WORK, CARRY, CARRY, MOVE, MOVE], undefined, {role: 'upgrader'});
-        console.log('Spawning new upgrader: ' + newName);
+        //console.log('Spawning new upgrader: ' + newName);
     }
     
     var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
     if (builders.length < 1) {
         var newName = Game.spawns['Spawn1'].createCreep([CARRY, CARRY, WORK, WORK, MOVE, MOVE], undefined, {role: 'builder'});
-        console.log('Spawning new builder: ' + newName);
+        //console.log('Spawning new builder: ' + newName);
     }
     
     var repairers = _.filter(Game.creeps, (creep) => creep.memory.role == 'repairer');
     if (repairers.length < 1) {
         var newName = Game.spawns['Spawn1'].createCreep([CARRY, CARRY, WORK, WORK, MOVE, MOVE], undefined, {role: 'repairer'});
-        console.log('Spawning new repairer: ' + newName);
+        //console.log('Spawning new repairer: ' + newName);
     }
     
     if(Game.spawns['Spawn1'].spawning) {
@@ -59,19 +59,26 @@ module.exports.loop = function () {
             {align: 'left', opacity: 0.8});
     }
 
+    var ddict = new defaultDict();
     for (var name in Game.creeps) {
         var creep = Game.creeps[name];
         if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
+            ddict['H'] += 1;
         }
         if(creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
+            ddict['U'] += 1;
         }
         if (creep.memory.role == 'builder') {
             roleBuilder.run(creep);
+            ddict['B'] += 1;
         }
         if (creep.memory.role == 'repairer') {
             roleRepairer.run(creep);
+            ddict['R'] += 1;
         }
     }
+
+    console.log('Num harvesters: ' + ddict.get('H'));
 }
